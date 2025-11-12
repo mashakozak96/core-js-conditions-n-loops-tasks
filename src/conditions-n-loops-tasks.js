@@ -413,7 +413,8 @@ function sortByAsc(arr) {
  */
 function shuffleChar(str, iterations) {
   let res = str;
-  for (let j = 0; j < iterations; j += 1) {
+  let count = 0;
+  function countIterations() {
     let str1 = '';
     let str2 = '';
     for (let i = 0; i < res.length; i += 2) {
@@ -423,6 +424,14 @@ function shuffleChar(str, iterations) {
       str2 += res[i];
     }
     res = str1 + str2;
+  }
+  do {
+    countIterations();
+    count += 1;
+  } while (res !== str && count < iterations);
+  const num = iterations % count;
+  for (let j = 0; j < num; j += 1) {
+    countIterations();
   }
   return res;
 }
